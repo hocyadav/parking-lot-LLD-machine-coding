@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.Arrays;
 import java.util.List;
@@ -93,6 +94,10 @@ public class DemoApplication implements CommandLineRunner {
 		//when user exit and paid the money then change the ticket status to TICKET_DONE
 		//and using parking lot id + slot id go to slot_lock table and mark the status of that slot available
 		// (use same concept as book my show)
+		//TODO OR we can create a DAO SQL in spot dao class like see below
+//		@Query(value = "select * from seats where id in (select seat_id from seat_lock where show_id = :showId and lock_status = 'available')",
+//				nativeQuery = true)
+//		List<Seat> findAllAvailableShowSeats(Long showId);
 
 		final List<Slot> slots = slotService.getAvailableSlot();
 		System.out.println("slots = " + slots);
