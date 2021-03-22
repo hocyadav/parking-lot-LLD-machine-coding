@@ -14,6 +14,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @SpringBootApplication
 public class DemoApplication implements CommandLineRunner {
@@ -56,8 +57,14 @@ public class DemoApplication implements CommandLineRunner {
 //		vehicleDao.save(vehicle2);//this is run time so not required db call save via other entity that it belongs,
 //		comment then add cascade all
 
-		final List<Slot> availableSlot = slotService.getAvailableSlot();
-		System.out.println("availableSlot = " + availableSlot);
+		//M1: get slots by parking lot - not direclty, if we want ground floor slots then we cant get via slotdao
+//		final List<Slot> availableSlot = slotService.getAvailableSlot();
+//		System.out.println("availableSlot = " + availableSlot);
+
+		//M2: find all ground floor parting slots
+		final Optional<ParkingLot> parkingLot = parkingLotDao.findById(1L);
+		final List<Slot> availableSlot = parkingLot.get().getParkingSlots();
+		System.out.println("ground floor parkingSlots = " + availableSlot);
 
 		//1 use case - pending min number slot booking
 		ticketService.bookTicket(vehicle1);
