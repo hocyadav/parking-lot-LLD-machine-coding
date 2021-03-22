@@ -18,7 +18,7 @@ public class SlotService {
     @Autowired
     SlotDao slotDao;
 
-    public List<Slot> getAvailableSlot() {
+    public List<Slot> getAvailableSlot() {//get slots via parking dao , if we want all ground floor slot then we cant get from here
         final List<Slot> list = slotDao.findAll();
         System.out.println("list = " + list);
         final List<Slot> available = list.stream()

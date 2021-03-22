@@ -88,6 +88,11 @@ public class DemoApplication implements CommandLineRunner {
 		//use case 4 : free slots for ticket 1 and 3
 		ticketService.freeSlot(1L);
 		ticketService.freeSlot(3L);
+		//todo : ticket will create at first time when user enters with status TICKET_TEMP,
+		// and store info of parking lot id(from parking lot obj), slot id (from slot obj) and vehicle obj
+		//when user exit and paid the money then change the ticket status to TICKET_DONE
+		//and using parking lot id + slot id go to slot_lock table and mark the status of that slot available
+		// (use same concept as book my show)
 
 		final List<Slot> slots = slotService.getAvailableSlot();
 		System.out.println("slots = " + slots);
