@@ -8,4 +8,5 @@ public class ParkingSlotLock {//TODO impl :same like book my show
     Long parkingId;
     Long slotId;
     String status;//lock status
+
 }
